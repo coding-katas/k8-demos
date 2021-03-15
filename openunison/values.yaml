@@ -1,0 +1,46 @@
+network:
+  openunison_host: "k8sou.apps.172-18-0-1.nip.io"
+  dashboard_host: "k8sdb.apps.172-18-0-1.nip.io"
+  api_server_host: ""
+  session_inactivity_timeout_seconds: 900
+  k8s_url: http://0.0.0.0:6443
+cert_template:
+  ou: "Kubernetes"
+  o: "MyOrg"
+  l: "My Cluster"
+  st: "State of Cluster"
+  c: "MyCountry"
+image: "docker.io/tremolosecurity/openunison-k8s-saml2:latest"
+myvd_config_path: "WEB-INF/myvd.conf"
+k8s_cluster_name: kubernetes
+enable_impersonation: false
+dashboard:
+  namespace: "kubernetes-dashboard"
+  cert_name: "kubernetes-dashboard-certs"
+  label: "k8s-app=kubernetes-dashboard"
+  service_name: kubernetes-dashboard
+certs:
+  use_k8s_cm: false
+trusted_certs: 
+  - name: internal-ca 
+    pem_b64: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUREVENDQWZXZ0F3SUJBZ0lVZVB5RmU2cFNMRWJFVmFLWmFsK1BOQ0IrVGcwd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0ZqRVVNQklHQTFVRUF3d0xhVzUwWlhKdVlXd3RZMkV3SGhjTk1qRXdNekUxTURZeU1qTTRXaGNOTXpFdwpNekV6TURZeU1qTTRXakFXTVJRd0VnWURWUVFEREF0cGJuUmxjbTVoYkMxallUQ0NBU0l3RFFZSktvWklodmNOCkFRRUJCUUFEZ2dFUEFEQ0NBUW9DZ2dFQkFLa1ludzN5a3R5REIxZ2tkd0t4ZFpoYS9KQjhwL3J1TXh1V0VnZUsKbDBVQ2VKMDBjWmFHTytlUEJ1WEhQenZJdXJUMWhMa1YzajZkNGthNTFuL1h0OFJsZ29oaWpzazdseUV0SHBydwp6WEZ4UkFsS3ZmajFGSk85T2R2Q1BSYVBBckgyRmRVNGI1MzI3WjZ0ZXNGMm5oVlRxYXc1S20zMUtkbUloSmgrCnBUVXpYOFpUNVU2ZU8yK3NKQmw2MFRoS2dkRFI5cmJwQW04QkJ1VFFybHNQZGlHYm1ibzhQQUxmSUZhRkZXdUMKWmU1ZkJqYU80QUdVVS9uVmpKWkhnQnpob3M4Z0hZM2NSZy9RYXVpKzVvNmlmS3dYVWhUSkVuWlJjZFRLUjNzTAo1QmpzQ0kxMHpNb2dNV01sbWxmL3A3ZDNZMCtuTlZJQms5T2EwMlJuc2w1WGpSTUNBd0VBQWFOVE1GRXdIUVlEClZSME9CQllFRkwrcUpUb1NuSFhQbkV5aDlPamJ5SHBhYkVUN01COEdBMVVkSXdRWU1CYUFGTCtxSlRvU25IWFAKbkV5aDlPamJ5SHBhYkVUN01BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0RRWUpLb1pJaHZjTkFRRUxCUUFEZ2dFQgpBSFZ4ZjhOamF3cUhuYVpCL0ZOajZFejFCN2hYQ3ZqcGlvYkg5STJtRTlIWTNqTnNlMUhCek12bm92Q2ZsU1VKCi9mU2hSbklYV0t3Q0dlekVDdmJxYVB2cWNNZUZBUnA2bEdSbXFaUXNtUEtiWDRsd0hLWTUzNWZZWTFqbkVQSTYKQlV2L2xET2tZZFE3ZzQ1SENCOXlHNm5WY0E1ZDRmaktHSnFFZTUwNEF3TnFPTnhSMWNWYVhtVGxkaTBldzI5MAp5NDhUK2F2SkZpelEwN2FUUytQWnI4dzRaSHZxMythV09HYnVJUkhuL0NlN09LdVZjREV5OEQ4OHByYU5RSVJyCkJKang3YmRNZjFBM1hhZnZ4RHRFanRCaTFJUnQ0OUZvbEFieHo4UUExTzdXSVFQRWJnVkJDUXhwQWxadnBKVnIKVkdjZ0dBeUpFQ21uOWNUQ0h0WFVvdGM9Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K
+monitoring:
+  prometheus_service_account: system:serviceaccount:monitoring:prometheus-k8s
+saml:
+  idp_url: https://portal.apps.tremolo.io/idp-test/metadata/56513bd8-c54d-4ce0-b04a-1e26dab25ad9
+  metadata_xml_b64: ""
+database:
+  hibernate_dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+  quartz_dialect: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+  driver: com.mysql.jdbc.Driver
+  url: jdbc:mysql://mariadb.mariadb.svc.cluster.local:3306/unison
+  user: unison 
+  validation: SELECT 1
+smtp:
+  host: blackhole.blackhole.svc.cluster.local 
+  port: 1025
+  user: none
+  from: donotreply@domain.com 
+  tls: false
+
+
