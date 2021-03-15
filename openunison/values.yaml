@@ -3,7 +3,7 @@ network:
   dashboard_host: "k8sdb.apps.172-18-0-1.nip.io"
   api_server_host: ""
   session_inactivity_timeout_seconds: 900
-  k8s_url: http://0.0.0.0:6443
+  k8s_url: https://0.0.0.0:6443
 cert_template:
   ou: "Kubernetes"
   o: "MyOrg"

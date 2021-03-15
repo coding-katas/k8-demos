@@ -32,7 +32,6 @@ echo -e "$ kubectl expose deployment/blackhole --type=ClusterIP --port 1025 --ta
 tput setaf 3
 kubectl expose deployment/blackhole --type=ClusterIP --port 1025 --target-port=1025 -n blackhole
 
-#exit
 
 tput setaf 5
 echo -e "\n \n*******************************************************************************************************************"
@@ -76,6 +75,7 @@ tput setaf 5
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Step 6: Wait for pod openunison-operator to be in running state"
 echo -e "*******************************************************************************************************************"
+sleep 30
 kubectl get pods --namespace openunison
 kubectl wait --for=condition=ready pod -l app=openunison-operator --namespace openunison
 kubectl get pods --namespace openunison
@@ -103,6 +103,7 @@ echo -e "\n \n******************************************************************
 echo -e "Step 6: Wait for pod openunison-orchestra to be in running state"
 echo -e "*******************************************************************************************************************"
 kubectl get pods --namespace openunison
+sleep 30
 kubectl wait --for=condition=ready pod -l app=openunison-orchestra --namespace openunison
 kubectl get pods --namespace openunison
 
@@ -111,8 +112,9 @@ tput setaf 5
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Step 6: Wait for pods"
 echo -e "*******************************************************************************************************************"
+kubectl get pods -n openunison
 kubectl wait --for=condition=ready pod -l app=openunison --namespace openunison
-
+kubectl get pods -n openunison
 
 
 echo -e "\n \n*******************************************************************************************************************"
@@ -121,14 +123,10 @@ echo -e "***********************************************************************
 tput setaf 2
 echo -e "$ kubectl get pods -n openunison"
 kubectl get pods -n openunison
+exit
 
 #docker.io/tremolosecurity/openunison- k8s-login-saml2:latest to 
 #docker.io/tremolosecurity/openunison-k8s-saml2:latest
-
-
-
-
-
 
 
 echo -e "\n \n*******************************************************************************************************************"
@@ -154,3 +152,8 @@ kubectl edit ingress -n openunison
 
 # Test the indentity provider
 curl --insecure https://k8sou.apps.172-18-0-1.nip.io/auth/forms/saml2_rp_metadata.jsp
+
+
+kubectl exec -ti mariadb-0 -n mariadb -- mysql -u \ unison --password='startt123' -e "insert into userGroups (userId,groupId) values (2,1);" unison
+kubectl exec -ti mariadb-0 -n mariadb -- mysql -u \ unison --password='startt123' -e "insert into userGroups (userId,groupId) values (2,2);" unison
+
