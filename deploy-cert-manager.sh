@@ -48,7 +48,7 @@ kubectl create secret tls ca-key-pair --key=./tls.key --cert=./tls.crt -n cert-m
 
 tput setaf 5
 echo -e "\n \n*******************************************************************************************************************"
-echo -e "Step 3: Create the ClusterIssuer object so that all of our Ingress objects can have properly minted certificates"
+echo -e "Step 4: Create the ClusterIssuer object so that all of our Ingress objects can have properly minted certificates"
 echo -e "*******************************************************************************************************************"
 tput setaf 3
 cd ..
@@ -57,10 +57,16 @@ kubectl create -f ./certmanager-ca.yaml
 
 
 echo -e "\n \n*******************************************************************************************************************"
-echo -e "Step 4: Import our certificate into both our worker and nodes"
+echo -e "Step 5: Import our certificate into both our worker and nodes"
 echo -e "*******************************************************************************************************************"
 cd ~/
-kubectl get secret ca-key-pair -n cert-manager -o json | jq -r '.data["tls.crt"]' | base64 -d > internal-ca.crt
+FILE=~/internal-ca.crt
+if [ -f "$FILE" ]; then
+  echo "internal crt exist"
+else
+  kubectl get secret ca-key-pair -n cert-manager -o json | jq -r '.data["tls.crt"]' | base64 -d > internal-ca.crt
+
+fi
 docker cp internal-ca.crt cluster01-worker:/usr/local/share/ca-certificates/internal-ca.crt
 docker exec -ti cluster01-worker update-ca-certificates 
 docker restart cluster01-worker

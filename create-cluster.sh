@@ -17,8 +17,8 @@ tput setaf 5
 #echo -e "Step 2: Install Helm3 and jq"
 #echo -e "*******************************************************************************************************************"
 #tput setaf 3
-#sudo snap install helm --classic
-#sudo snap install jq --classic
+sudo snap install helm --classic
+sudo snap install jq --classic
 
 tput setaf 5
 #Create KIND Cluster calle cluster01 using config cluster01-kind.yaml
@@ -55,10 +55,10 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/ngin
 #Patch NGINX for to forward 80 and 443
 tput setaf 5
 echo -e "\n \n*******************************************************************************************************************"
-echo -e "Step 4: Patch NGINX deployment to expose pod on HOST ports 81 ad 443"
+echo -e "Step 4: Patch NGINX deployment to expose pod on HOST ports 80 ad 443"
 echo -e "*******************************************************************************************************************"
 tput setaf 3
-kubectl patch deployments -n ingress-nginx nginx-ingress-controller -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx-ingress-controller","ports":[{"containerPort":80,"hostPort":81},{"containerPort":443,"hostPort":443}]}]}}}}'
+kubectl patch deployments -n ingress-nginx nginx-ingress-controller -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx-ingress-controller","ports":[{"containerPort":80,"hostPort":80},{"containerPort":443,"hostPort":443}]}]}}}}'
 
 #Find IP address of Docker Host
 tput setaf 3

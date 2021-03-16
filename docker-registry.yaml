@@ -81,10 +81,10 @@ metadata:
 spec:
   tls:
     - hosts:
-        - docker.apps.172-18-0-1.nip.io
+        - docker.apps.10-132-0-8.nip.io
       secretName: ingress-tls-certificate
   rules:
-    - host: docker.apps.172-18-0-1.nip.io
+    - host: docker.apps.10-132-0-8.nip.io
       http:
         paths:
           - path: /

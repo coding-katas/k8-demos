@@ -56,8 +56,8 @@ echo -e "\n \n******************************************************************
 echo -e "Step 4: Add Tremolo Security's Helm Repo & update (see https://artifacthub.io/packages/helm/tremolo/openunison-k8s-saml2)"
 echo -e "*******************************************************************************************************************"
 tput setaf 2
-echo -e "$ helm repo add tremolo https://nexus.tremolo.io/repository/Helm/ && helm repo update"
-helm repo add tremolo https://nexus.tremolo.io/repository/Helm/
+echo -e "$ helm repo add tremolo https://nexus.tremolo.io/repository/helm/ && helm repo update"
+helm repo add tremolo https://nexus.tremolo.io/repository/helm/
 helm repo update
 
 tput setaf 5
@@ -135,6 +135,8 @@ echo -e "***********************************************************************
 tput setaf 2
 echo -e "$ kubectl get pods -n openunison"
 
+
+exit
 kubectl edit openunison orchestra -n openunison
 #REMOVE:
 #- create_data: ca_cert: true key_size: 2048
@@ -151,7 +153,7 @@ kubectl edit ingress -n openunison
 #add to annotations--> cert-manager.io/cluster-issuer: ca-issuer 
 
 # Test the indentity provider
-curl --insecure https://k8sou.apps.172-18-0-1.nip.io/auth/forms/saml2_rp_metadata.jsp
+curl --insecure https://k8sou.apps.10-132-0-8.nip.io/auth/forms/saml2_rp_metadata.jsp
 
 
 kubectl exec -ti mariadb-0 -n mariadb -- mysql -u \ unison --password='startt123' -e "insert into userGroups (userId,groupId) values (2,1);" unison

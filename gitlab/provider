@@ -6,7 +6,7 @@ args:
     - openid
     - profile
   response_type: code
-  issuer: https://k8sou.172-18-0-1.nip.io/auth/idp/k8sIdp
+  issuer: https://k8sou.10-132-0-8.nip.io/auth/idp/k8sIdp
   discovery: true
   client_auth_method: query
   uid_field: sub
@@ -14,4 +14,4 @@ args:
   client_options:
     identifier: gitlab
     secret: secret
-    redirect_uri: https://gitlab.172-18-0-1.nip.io/users/auth/openid_connect/callback
+    redirect_uri: https://gitlab.10-132-0-8.nip.io/users/auth/openid_connect/callback
