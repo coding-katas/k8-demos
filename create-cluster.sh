@@ -58,7 +58,7 @@ echo -e "\n \n******************************************************************
 echo -e "Step 4: Patch NGINX deployment to expose pod on HOST ports 81 ad 443"
 echo -e "*******************************************************************************************************************"
 tput setaf 3
-kubectl patch deployments -n ingress-nginx nginx-ingress-controller -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx-ingress-controller","ports":[{"containerPort":80,"hostPort":81},{"containerPort":443,"hostPort":443}]}]}}}}'
+kubectl patch deployments -n ingress-nginx nginx-ingress-controller -p '{"spec":{"template":{"spec":{"containers":[{"name":"nginx-ingress-controller","ports":[{"containerPort":80,"hostPort":8181},{"containerPort":443,"hostPort":443}]}]}}}}'
 
 #Find IP address of Docker Host
 tput setaf 3
@@ -66,7 +66,7 @@ hostip=$(hostname  -I | cut -f1 -d' ')
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Cluster Creation Complete.  Please see the summary below:"
 echo -e "*******************************************************************************************************************"
-
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/aio/deploy/recommended.yaml
 tput setaf 7
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Your Kind Cluster Information: \n"
@@ -75,6 +75,9 @@ echo -e "Ingress rules will need to use the IP address of your Linux Host in the
 echo -e "Example:  You have a web server you want to expose using a host called ordering."
 echo -e "          Your ingress rule would use the hostname: ordering.$hostip.nip.io"
 echo -e "******************************************************************************************************************* \n"
+
+tput setaf 2
+echo -e "$ docker ps"
 docker ps
 
 

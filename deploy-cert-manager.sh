@@ -74,3 +74,8 @@ kubectl create -f ./docker-registry.yaml
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "cert-manager & docker registry deployments complete \n"
 echo -e "******************************************************************************************************************* \n"
+
+tput setaf 2
+echo -e "$ kubectl get pods -n cert-manager"
+tput setaf 3
+kubectl get pods -n cert-manager

@@ -22,10 +22,13 @@ kubectl apply -n guestbook-dev -f https://k8s.io/examples/application/guestbook/
 kubectl apply -n guestbook-dev -f https://k8s.io/examples/application/guestbook/frontend-deployment.yaml
 kubectl apply -n guestbook-dev -f https://k8s.io/examples/application/guestbook/frontend-service.yaml
 
-kubectl port-forward svc/frontend 8080:80 -n guestbook-dev
+kubectl port-forward svc/frontend 8089:80 -n guestbook-dev
 
 
 tput setaf 7
 echo -e "\n \n*******************************************************************************************************************"
 echo -e "Now launch your frontend at port 80 \n"
 echo -e "******************************************************************************************************************* \n"
+
+
+#kubectl delete --all pods --namespace=guestbook-dev

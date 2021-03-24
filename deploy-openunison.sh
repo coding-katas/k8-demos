@@ -136,7 +136,7 @@ tput setaf 2
 echo -e "$ kubectl get pods -n openunison"
 
 kubectl edit openunison orchestra -n openunison
-#REMOVE:
+#REMOVE: from line 54
 #- create_data: ca_cert: true key_size: 2048
 #server_name: k8sou.apps.192-168-2-114.nip.io sign_by_k8s_ca: false subject_alternative_names:
 #- k8sdb.apps.192-168-2-114.nip.io
@@ -148,10 +148,12 @@ kubectl edit openunison orchestra -n openunison
 kubectl delete secret ou-tls-certificate -n openunison
 
 kubectl edit ingress -n openunison
-#add to annotations--> cert-manager.io/cluster-issuer: ca-issuer 
+#add to annotations--> cert-manager.io/cluster-issuer: ca-issuer
+
 
 # Test the indentity provider
 curl --insecure https://k8sou.apps.172-18-0-1.nip.io/auth/forms/saml2_rp_metadata.jsp
+curl --insecure k8sou.apps.172-18-0-1.nip.io/auth/forms/saml2_rp_metadata.jsp
 
 
 kubectl exec -ti mariadb-0 -n mariadb -- mysql -u \ unison --password='startt123' -e "insert into userGroups (userId,groupId) values (2,1);" unison

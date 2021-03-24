@@ -36,6 +36,7 @@ helm install gitlab gitlab/gitlab -n gitlab -f gitlab-values.yaml
 
 
 kubectl edit ingress -n gitlab
-# change 
+# change : kubernetes.io/ingress.class: nginx 
+# secretName: gitlab-web-tls
 
 kubectl get secret gitlab-gitlab-initial-root-password -o json -n gitlab | jq -r '.data.password' | base64 -d
